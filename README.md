@@ -1,23 +1,20 @@
 # Cryptocurrencies
 
 ## Overview
-Cryptocurrencies are digital currencies that can be used to online to purchase goods and services. There are thousands of cryptocurrencies that are currently being publicly traded. As cryptocurrencies become more popular, identifying patterns in how each coin traded, mined, and supplied may help investors decide on which coin to invest in. 
+Cryptocurrencies are digital currencies that can be used to online to purchase goods and services. There are thousands of cryptocurrencies that are currently being publicly traded. As cryptocurrencies become more popular, identifying patterns in how each coin is traded, mined, and supplied may help investors decide on which coins to invest in. 
 
-This project uses principal component analysis (PCA) to cluster cryptocurrency data so that we can identify patterns in how coins group together. 
-
-an unsupervised machine learning algorithm to clusters cryptocurrencies, which can be used to identify patterns in currently traded cryptocurrencies with working algorithms. 
-
+This project uses principal component analysis (PCA) to identify patterns in how coins cluster together. 
 
 ## Results
 The cryptocurrency dataset cointained information on ProofType (a consensus on how the cryptocurrency blockchain is operated), total coins mined, total coin supply, and the algorithm used to implement the cyrptocurrency. 
 
-The data was pre-processed remove coins that are not traded or do not have working algorithms. Coins that had not yet been mined were also removed from the dataset since we are interested in coin mining and supply. 
+The data was pre-processed to remove coins that are not traded or do not have working algorithms. Coins that had not yet been mined were also removed from the dataset since we are interested in coin mining and supply. 
 
-The resulting data was reduced to three principal components, and the KMeans algorithm was used to generate an elbow curve to find the best value for K (number of clusters to use in our unsupervised machine learning algorithm).
+The resulting data was reduced to three principal components, and scaled using the StandardScaler() from the sklearn library. Then, the KMeans algorithm was used to generate an elbow curve to find the best value for K.
 
 ![](images/elbow_curve.png)
 
-The elbow curve flattens after K=4, thus 4 clusters were used in our K-Means model. This model predicted which of the four clusters (or classes) each coin would group into based on principal component values generated from the original data. 
+The elbow curve is a measure of variation in the dataset. As K (the number of clusters) increases, the variability in the data (inertia) decreases. The point on the elow curve where the curve flattens is the number of clusters that should be used to analyze the data in the K-Means model. Here, the elbow curve flattens after K=4, thus 4 clusters were used in our K-Means model. This model predicts which of the four clusters (or classes) each coin would group into based on principal component values generated from the scaled data. 
 
 ![](images/clustered_df.png)
 
@@ -31,7 +28,7 @@ Lastly, we generated a 2D scatter plot to visualize the distribution of each cla
 
 
 ## Summary
-When reduced to three principal components, the cryptocurrency data clusters as follows:
+When reduced to three principal components and clustered using the K-Means model, the cryptocurrency data groups as follows:
 
 - Class 0: Low PC 1, Medium PC2, Low PC3
 - Class 1: Low PC 1, Low PC2, Low PC3
